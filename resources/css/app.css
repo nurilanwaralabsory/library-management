@@ -7,9 +7,52 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+    font-family: 'BebasNeue';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'IBMPlexSans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/IBMPlexSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'IBMPlexSans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/IBMPlexSans-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'IBMPlexSans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/IBMPlexSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'IBMPlexSans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/IBMPlexSans-Bold.ttf') format('truetype');
+}
+
 @theme {
+    /* FONT */
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-BebasNeue: 'BebasNeue', sans-serif;
+    --font-IBMPlexSans: 'IBMPlexSans', sans-serif;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -25,6 +68,7 @@
     --color-popover-foreground: var(--popover-foreground);
 
     --color-primary: var(--primary);
+    --color-primary-admin: oklch(0.38 0.1411 268.92);
     --color-primary-foreground: var(--primary-foreground);
 
     --color-secondary: var(--secondary);
@@ -57,6 +101,31 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+
+    /* COLOR CUSTOM */
+
+    /* dark */
+    --color-dark-100: oklch(0.2125 0.0109 260.67);
+    --color-dark-200: oklch(0.3451 0.0435 293.15);
+    --color-dark-300: oklch(0.2799 0.0323 271.54);
+    --color-dark-400: oklch(0.2795 0.0368 260.03);
+    --color-dark-500: oklch(0.2077 0.0398 265.75);
+    --color-dark-600: oklch(0.3631 0.0568 271.36);
+    --color-dark-700: oklch(0.4334 0.0544 271.89);
+    --color-dark-800: oklch(0.2546 0.0272 272.01);
+
+    /* light */
+    --color-light-100: oklch(0.9088 0.0438 271.34);
+    --color-light-200: oklch(0.8758 0.0587 73.67);
+    --color-light-300: oklch(0.9811 0.0093 286.23);
+    --color-light-400: oklch(0.9551 0.0043 197.09);
+    --color-light-500: oklch(0.6434 0 0);
+    --color-light-600: oklch(0.9846 0.0017 247.84);
+    --color-light-700: oklch(0.9288 0.0126 255.51);
+    --color-light-800: oklch(0.9842 0.0034 247.86);
+
+    /* BREAKPOINT */
+    --breakpoint-xs: 480px;
 }
 
 /*
@@ -77,6 +146,264 @@
     }
 }
 
+/* layer components */
+@layer components {
+    .form-btn {
+        @apply inline-flex min-h-14 w-full items-center justify-center rounded-md bg-primary px-6 py-2 text-base font-bold text-dark-100 hover:bg-primary;
+    }
+
+    .form-input {
+        @apply min-h-14 w-full border-none bg-dark-300 text-base font-bold text-white placeholder:font-normal placeholder:text-light-100 focus-visible:shadow-none focus-visible:ring-0;
+    }
+
+    /* Book Card */
+    .book-title {
+        @apply mt-2 line-clamp-1 text-base font-semibold text-white xs:text-xl;
+    }
+
+    .book-genre {
+        @apply mt-1 line-clamp-1 text-sm text-light-100 italic xs:text-base;
+    }
+
+    .book-loaned {
+        @apply flex flex-row items-center gap-1 max-xs:justify-center;
+    }
+
+    .book-btn {
+        @apply mt-3 min-h-14 w-full bg-dark-600 font-BebasNeue text-base text-primary;
+    }
+
+    /* Borrowed Book */
+    .borrowed-book {
+        @apply relative w-full rounded-2xl p-5 gradient-vertical xs:w-min;
+    }
+
+    .borrowed-book_cover {
+        @apply flex w-full items-center justify-center rounded-lg px-10 py-4 lg:px-16;
+    }
+
+    /* Book Cover */
+    .book-cover_extra_small {
+        @apply h-10 w-[28.95px];
+    }
+
+    .book-cover_small {
+        @apply h-[76px] w-[55px];
+    }
+
+    .book-cover_medium {
+        @apply h-[199px] w-[144px];
+    }
+
+    .book-cover_regular {
+        @apply h-[169px] w-[114px] xs:h-[239px] xs:w-[174px];
+    }
+
+    .book-cover_wide {
+        @apply h-[354px] w-[256px] xs:h-[404px] xs:w-[296px];
+    }
+
+    /* Book List */
+    .book-list {
+        @apply mt-10 flex flex-wrap justify-between gap-5 max-xs:justify-between xs:gap-10;
+    }
+
+    /* Book Overview */
+    .book-overview {
+        @apply flex flex-col-reverse items-center gap-12 sm:gap-32 xl:flex-row xl:gap-8;
+    }
+
+    .book-overview h1 {
+        @apply text-5xl font-semibold text-white md:text-7xl;
+    }
+
+    .book-info {
+        @apply mt-7 flex flex-row flex-wrap gap-4 text-xl text-light-100;
+    }
+
+    .book-copies {
+        @apply mt-1 flex flex-row flex-wrap gap-4;
+    }
+
+    .book-copies p {
+        @apply text-xl text-light-100;
+    }
+
+    .book-copies p span {
+        @apply ml-2 font-semibold text-primary;
+    }
+
+    .book-description {
+        @apply mt-2 text-justify text-xl text-light-100;
+    }
+
+    .book-overview_btn {
+        @apply mt-4 min-h-14 w-fit bg-primary text-dark-100 hover:bg-primary/90 max-md:w-full;
+    }
+
+    /* File Upload */
+    .upload-btn {
+        @apply flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md;
+    }
+
+    .upload-filename {
+        @apply mt-1 text-center text-xs;
+    }
+
+    .progress {
+        @apply rounded-full bg-green-800 p-0.5 text-center font-BebasNeue text-[8px] leading-none font-bold text-light-100;
+    }
+
+    /* Search */
+    .search {
+        @apply relative mt-10 flex min-h-14 w-full items-center rounded-xl bg-dark-300 px-4;
+    }
+
+    .search-input {
+        @apply w-full border-none font-bold text-white placeholder:font-normal placeholder:text-light-100 focus-visible:shadow-none focus-visible:ring-0;
+    }
+
+    /* Book Receipt */
+    .book-receipt_admin-btn {
+        @apply rounded-md bg-light-300 font-semibold text-primary-admin hover:bg-light-300/80;
+    }
+
+    /* Book Ticket */
+    #book-ticket {
+        @apply relative mt-10 hidden w-[544px] overflow-hidden bg-dark-300 py-8;
+    }
+
+    #book-ticket #book-details div {
+        @apply space-y-1 rounded-md border border-light-100/10 p-3;
+    }
+
+    #book-ticket #book-details div p:first-child {
+        @apply text-xs text-light-700;
+    }
+
+    #book-ticket #book-details div p:last-child {
+        @apply text-sm font-bold text-white;
+    }
+
+    #book-ticket #book-divider div:first-child {
+        @apply absolute top-1/2 -left-3.5 size-7 -translate-y-1/2 rounded-full bg-black;
+    }
+
+    #book-ticket #book-divider div:last-child {
+        @apply absolute top-1/2 -right-3.5 size-7 -translate-y-1/2 rounded-full bg-black;
+    }
+
+    .book-ticket-circles {
+        @apply absolute inset-x-0 -bottom-6 flex flex-row gap-1.5;
+    }
+
+    /* Not Found */
+    #not-found {
+        @apply flex w-full flex-col items-center justify-center text-center;
+    }
+
+    #not-found h4 {
+        @apply mt-6 text-2xl font-semibold text-white;
+    }
+
+    #not-found p {
+        @apply mt-1 w-[360px] text-light-100;
+    }
+
+    .not-found-btn {
+        @apply mt-6 min-h-12 min-w-[360px] bg-primary font-BebasNeue text-xl text-dark-100 hover:bg-primary/90;
+    }
+
+    /* Pagination */
+    #pagination {
+        @apply flex flex-row justify-end gap-3;
+    }
+
+    .pagination-btn_light {
+        @apply bg-light-300 text-dark-300 hover:bg-light-300/70;
+    }
+
+    .pagination-btn_dark {
+        @apply bg-dark-300 hover:bg-dark-100;
+    }
+
+    #pagination p {
+        @apply inline-flex items-center rounded-md px-4 py-1.5 text-center text-sm font-semibold;
+    }
+
+    /* Sort */
+    .select-trigger {
+        @apply h-10 w-40 border-dark-100 bg-dark-300 px-4 text-light-100;
+    }
+
+    .select-content {
+        @apply border-dark-100 bg-dark-300 text-light-100;
+    }
+
+    .select-item {
+        @apply focus:bg-dark-600 focus:text-light-100;
+    }
+}
+/* end layer components */
+
+@utility gradient-vertical {
+    background: linear-gradient(180deg, #12141d 0%, #12151f 100%);
+}
+
+.gradient-gray {
+    background: linear-gradient(270deg, #37363a 0%, #353637 100%);
+}
+
+.gradient-blue {
+    background: linear-gradient(180deg, #232839 0%, #12141d 100%);
+}
+
+/* Auth */
+.auth-container {
+    @apply relative flex flex-col-reverse text-light-100 sm:flex-row;
+}
+
+.auth-form {
+    @apply my-auto flex h-full min-h-screen flex-1 items-center bg-dark-100 bg-cover bg-top px-5 py-10;
+    /* @apply bg-pattern bg-dark-100 my-auto flex h-full min-h-screen flex-1 items-center bg-cover bg-top px-5 py-10; */
+}
+
+.auth-box {
+    @apply mx-auto flex max-w-xl flex-col gap-6 rounded-lg p-10 gradient-vertical;
+}
+
+.auth-illustration {
+    @apply sticky h-40 w-full sm:top-0 sm:h-screen sm:flex-1;
+}
+
+/* Root */
+.root-container {
+    @apply flex min-h-screen flex-1 flex-col bg-dark-100 bg-cover bg-top px-5 xs:px-10 md:px-16;
+    /* @apply bg-pattern bg-dark-100 xs:px-10 flex min-h-screen flex-1 flex-col bg-cover bg-top px-5 md:px-16; */
+}
+
+/* Book Details */
+.book-details {
+    @apply mt-16 mb-20 flex flex-col gap-16 lg:mt-36 lg:flex-row;
+}
+
+.book-details h3 {
+    @apply text-xl font-semibold text-primary;
+}
+
+/* Library */
+.library {
+    @apply mx-auto flex w-full max-w-xl flex-col text-center;
+}
+
+.library-subtitle {
+    @apply text-lg font-semibold text-light-100 uppercase;
+}
+
+.library-title {
+    @apply mt-2 text-3xl font-semibold text-white xs:text-5xl;
+}
+
 :root {
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
@@ -84,8 +411,8 @@
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.8523 0.0586 71.99);
+    --primary-foreground: oklch(0.9838 0.0035 247.86);
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
     --muted: oklch(0.97 0 0);
@@ -120,8 +447,8 @@
     --card-foreground: oklch(0.985 0 0);
     --popover: oklch(0.145 0 0);
     --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.985 0 0);
-    --primary-foreground: oklch(0.205 0 0);
+    --primary: oklch(0.8523 0.0586 71.99);
+    --primary-foreground: oklch(0.9838 0.0035 247.86);
     --secondary: oklch(0.269 0 0);
     --secondary-foreground: oklch(0.985 0 0);
     --muted: oklch(0.269 0 0);
