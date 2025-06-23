@@ -1,10 +1,14 @@
 import { cn } from '@/lib/utils';
+import { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { Avatar } from './ui/avatar';
 
 const Header = () => {
+    const page = usePage<SharedData>();
+    const { auth } = page.props;
     const pathname = usePage();
+
     return (
         <header className="my-10 flex justify-between gap-5">
             <Link href="/">
@@ -13,21 +17,33 @@ const Header = () => {
 
             <ul className="flex flex-row items-center gap-8">
                 <li>
-                    <Link
-                        href="/library"
-                        className={cn('cursor-pointer text-base capitalize', pathname.url == '/library' ? 'text-light-200' : 'text-light-100')}
-                    >
-                        Library
+                    <Link href="/" className={cn('cursor-pointer text-base capitalize', pathname.url == '/' ? 'text-light-200' : 'text-light-100')}>
+                        Home
                     </Link>
                 </li>
                 <li>
-                    <Link href="/my-profile">
-                        <Avatar>
-                            <AvatarImage src="https://github.com/shadcn.png" />
-                            <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
+                    <Link
+                        href="/search"
+                        className={cn('cursor-pointer text-base capitalize', pathname.url == '/search' ? 'text-light-200' : 'text-light-100')}
+                    >
+                        Search
                     </Link>
                 </li>
+                {auth.user ? (
+                    <li>
+                        <Link href="/my-profile">
+                            <div className="flex items-center gap-2">
+                                <Avatar>
+                                    <AvatarImage src="https://github.com/shadcn.png" />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                </Avatar>
+                                <p className="cursor-pointer text-base font-medium text-light-100 capitalize">{auth.user.name.split(' ')[0]}</p>
+                            </div>
+                        </Link>
+                    </li>
+                ) : (
+                    ''
+                )}
             </ul>
         </header>
     );

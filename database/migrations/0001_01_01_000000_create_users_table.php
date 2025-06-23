@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('nim')->unique();
+            $table->text('ktm');
+            $table->enum('status', ['PENDING', 'APPROVED', 'REJECTED'])->default('PENDING');
+            $table->enum('role', ['USER', 'ADMIN'])->default('USER');
             $table->rememberToken();
             $table->timestamps();
         });

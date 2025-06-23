@@ -13,7 +13,6 @@ export default function BookOverview({
     cover_color: coverColor,
     cover_url: coverUrl,
 }: Book) {
-    // console.log(title);
     return (
         <section className="book-overview">
             <div className="flex flex-1 flex-col gap-5">

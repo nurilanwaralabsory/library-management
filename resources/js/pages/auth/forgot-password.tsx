@@ -22,12 +22,15 @@ export default function ForgotPassword({ status }: { status?: string }) {
     };
 
     return (
-        <AuthLayout title="Forgot password" description="Enter your email to receive a password reset link">
+        <AuthLayout>
             <Head title="Forgot password" />
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
 
-            <div className="space-y-6">
+            <div className="flex flex-col gap-4">
+                <h1 className="text-2xl font-semibold text-white">Forgot your password?</h1>
+                <p className="text-light-100">No problem. Just let us know your email address and we will email you a password reset link.</p>
+
                 <form onSubmit={submit}>
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email address</Label>
@@ -51,12 +54,13 @@ export default function ForgotPassword({ status }: { status?: string }) {
                             Email password reset link
                         </Button>
                     </div>
+                    <p className="text-center text-base font-medium">
+                        <span>Or, return to </span>{' '}
+                        <TextLink href={route('login')} className="font-bold text-primary">
+                            log in
+                        </TextLink>
+                    </p>
                 </form>
-
-                <div className="space-x-1 text-center text-sm text-muted-foreground">
-                    <span>Or, return to</span>
-                    <TextLink href={route('login')}>log in</TextLink>
-                </div>
             </div>
         </AuthLayout>
     );

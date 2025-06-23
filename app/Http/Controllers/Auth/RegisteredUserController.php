@@ -32,14 +32,24 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'nim' => 'required|string|max:255|unique:' . User::class,
+            'ktm' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        $path = null;
+
+        if ($request->hasFile('ktm')) {
+            $path = $request->file('ktm')->store('ktm-images', 'public');
+        }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'nim' => $request->nim,
+            'ktm' => $path,
         ]);
 
         event(new Registered($user));
