@@ -7,7 +7,7 @@ import { Button } from './ui/button';
 const BookCard = ({ id, title, genre, cover_color: coverColor, cover_url: coverUrl, isLoanedBook = false }: Book) => {
     return (
         <li className={cn(isLoanedBook && 'w-full xs:w-52')}>
-            <Link href={`/books/${id}`} className={cn(isLoanedBook && 'flex w-full flex-col items-center')}>
+            <Link href={route('detail-book', id)} className={cn(isLoanedBook && 'flex w-full flex-col items-center')}>
                 <BookCover coverColor={coverColor} coverImage={coverUrl} />
 
                 <div className={cn('mt-4', !isLoanedBook && 'max-w-28 xs:max-w-40')}>

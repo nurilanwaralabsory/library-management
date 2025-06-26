@@ -15,6 +15,7 @@ class BookSeeder extends Seeder
     {
         $books = [
             [
+                'id' => '9084986f-456c-449b-ae6e-59ef1f26b129',
                 'title' => 'CSS in Depth',
                 'author' => 'Keith J. Grant',
                 'genre' => 'Web Development',
@@ -28,6 +29,7 @@ class BookSeeder extends Seeder
                 'summary' => 'CSS in Depth starts by reviewing the basic principles of CSS, then quickly moves on to more advanced concepts. Grant emphasizes the importance of understanding the underlying mechanics of CSS properties like layout, box model, and positioning. Readers learn how to use these tools more effectively, making their code more predictable and easier to debug.'
             ],
             [
+                'id' => '350c3bc8-a5cc-45a3-ba16-97b93ed056b0',
                 'title' => 'HTML and CSS: Design and Build Websites',
                 'author' => 'Jon Duckett',
                 'genre' => 'Web Development',
@@ -41,6 +43,7 @@ class BookSeeder extends Seeder
                 'summary' => 'HTML and CSS: Design and Build Websites starts with an introduction to HTML, covering the basic building blocks of a webpage, including elements like headings, paragraphs, links, and images. Duckett carefully explains the structure and syntax of HTML, teaching readers how to write and organize their code.'
             ],
             [
+                'id' => 'b514f922-a715-45ec-846e-e51d40e15aa2',
                 'title' => 'System Design Interview',
                 'author' => 'Alex Xu',
                 'genre' => 'System Design',
@@ -54,6 +57,7 @@ class BookSeeder extends Seeder
                 'summary' => 'System Design Interview: An Insider\'s Guide begins by introducing the key concepts of system design, emphasizing the importance of understanding requirements, scalability, and reliability. Xu explains how to approach an open-ended problem by breaking it down into smaller, manageable components, ensuring a structured response.'
             ],
             [
+                'id' => 'b4ed06bf-02b2-42c4-8886-b3847af02cca',
                 'title' => 'Computer Science Distilled',
                 'author' => 'Wladston Ferreira Filho',
                 'genre' => 'Computer Science',
@@ -67,6 +71,7 @@ class BookSeeder extends Seeder
                 'summary' => 'Computer Science Distilled begins by explaining the art of problem-solving in computing, emphasizing the importance of breaking down problems into manageable parts. It introduces key computational concepts such as abstraction, algorithms, and complexity analysis, providing a strong foundation for tackling any programming challenge.'
             ],
             [
+                'id' => 'dc73abc1-8699-4e0a-91b0-a67e80292b9c',
                 'title' => 'The Art of Assembly Language',
                 'author' => 'Randall Hyde',
                 'genre' => 'Programming',
@@ -80,6 +85,7 @@ class BookSeeder extends Seeder
                 'summary' => 'The Art of Assembly Language introduces readers to the fundamentals of assembly programming, beginning with an overview of computer architecture. It explains how CPUs process instructions and manage data, providing the necessary background to appreciate the power of assembly language.'
             ],
             [
+                'id' => '8f45a8ad-e0e1-437e-8987-5bcbaca24bd9',
                 'title' => 'Seriously Good Software',
                 'author' => 'Marco Faella',
                 'genre' => 'Programming',
@@ -93,6 +99,7 @@ class BookSeeder extends Seeder
                 'summary' => 'Seriously Good Software starts by exploring the core principles of software development, emphasizing the importance of correctness—software must function as intended under all specified conditions. Faella uses clear examples to show how to identify and fix errors that might compromise the correctness of code.'
             ],
             [
+                'id' => '91445e57-01a8-4e1e-bb18-cf04b3a0b7d1',
                 'title' => 'Fundamentals of Database Systems',
                 'author' => 'Ramez Elmasri and Shamkant B. Navathe',
                 'genre' => 'Computer Science',
@@ -106,6 +113,7 @@ class BookSeeder extends Seeder
                 'summary' => 'Fundamentals of Database Systems begins by introducing the fundamental concepts of database systems, including their purpose, architecture, and role in modern computing. It explains key data modeling techniques, such as the Entity-Relationship (ER) model, which is used to design and visualize database schemas.'
             ],
             [
+                'id' => 'c3f2ff59-a3c2-47d2-a793-93457a9dccf7',
                 'title' => 'Operating System Concepts',
                 'author' => 'Abraham Silberschatz, Peter B. Galvin, and Greg Gagne',
                 'genre' => 'Computer Science',
@@ -119,6 +127,7 @@ class BookSeeder extends Seeder
                 'summary' => 'Operating System Concepts provides an in-depth exploration of operating systems, starting with an introduction to their fundamental role in computing. It describes how operating systems manage hardware resources, such as the CPU, memory, and storage, to ensure efficient and reliable operation.'
             ],
             [
+                'id' => 'fe03e013-53b8-4574-9ca8-caec69a9b16c',
                 'title' => 'Algorithms',
                 'author' => 'Robert Sedgewick and Kevin Wayne',
                 'genre' => 'Computer Science',
@@ -132,6 +141,7 @@ class BookSeeder extends Seeder
                 'summary' => 'Algorithms is a thorough exploration of algorithmic principles and their applications. It begins with the basics, introducing elementary algorithms like sorting and searching. These foundational topics are covered in-depth, explaining their importance in handling data efficiently and effectively.'
             ],
             [
+                'id' => '585df184-991b-4edf-9902-f8531c3a81d9',
                 'title' => 'The Clean Coder',
                 'author' => 'Robert C. Martin',
                 'genre' => 'Software',
@@ -145,6 +155,7 @@ class BookSeeder extends Seeder
                 'summary' => 'The Clean Coder delves into the principles and practices of professional software development. The book begins by defining what it means to be a professional programmer, emphasizing the importance of taking responsibility for your work and acting with integrity.'
             ],
             [
+                'id' => 'cea639ce-ee90-4ef9-9fef-c9562a247e99',
                 'title' => 'The Lean Startup',
                 'author' => 'Eric Ries',
                 'genre' => 'Software',
@@ -158,6 +169,7 @@ class BookSeeder extends Seeder
                 'summary' => 'The Lean Startup by Eric Ries is a guide to building and managing startups in a way that maximizes innovation while minimizing wasted effort. This approach helps entrepreneurs create successful businesses by avoiding long periods of untested development.'
             ],
             [
+                'id' => '68f7c183-b995-4ba3-a644-30110ebb932e',
                 'title' => 'Atomic Habits',
                 'author' => 'James Clear',
                 'genre' => 'Self Help',
@@ -171,6 +183,7 @@ class BookSeeder extends Seeder
                 'summary' => 'Atomic Habits by James Clear is a book about how small changes in daily habits can lead to significant transformations over time. Clear emphasizes that habits are the compound interest of self-improvement.'
             ],
             [
+                'id' => 'b6b9cc5d-95fd-488e-b1df-2a805678b430',
                 'title' => 'React in Action',
                 'author' => 'Mark Tielens Thomas',
                 'genre' => 'Web Development',
@@ -184,6 +197,7 @@ class BookSeeder extends Seeder
                 'summary' => 'React in Action by Mark Tielens Thomas is a practical guide to mastering React. The book starts by introducing the fundamentals of React, including components, JSX, props, and state management, and then explores more advanced topics.'
             ],
             [
+                'id' => '17a58b62-0258-45a5-8b8b-9a21a6d6630c',
                 'title' => 'JavaScript: The Good Parts',
                 'author' => 'Douglas Crockford',
                 'genre' => 'Programming',
@@ -197,6 +211,7 @@ class BookSeeder extends Seeder
                 'summary' => 'JavaScript: The Good Parts by Douglas Crockford is a concise guide to understanding and using the best features of JavaScript while avoiding its pitfalls. Crockford identifies "the good parts" of JavaScript, such as its dynamic object-oriented nature and functional programming capabilities.'
             ],
             [
+                'id' => 'd125678e-80d7-4ba8-97a6-cc6ee4b980ef',
                 'title' => 'Eloquent Javascript',
                 'author' => 'Marijn Haverbeke',
                 'genre' => 'Programming',
@@ -210,6 +225,7 @@ class BookSeeder extends Seeder
                 'summary' => 'Eloquent JavaScript by Marijn Haverbeke is a deep dive into JavaScript. The book begins with an introduction to programming concepts and quickly transitions into JavaScript fundamentals, including variables, functions, and control structures.'
             ],
             [
+                'id' => '383a8140-08b8-4c7c-97a7-e1bc68dc1488',
                 'title' => 'Fullstack React: The Complete Guide to ReactJS and Friends',
                 'author' => 'Accomazzo, Greif, and Murray',
                 'genre' => 'Web Development',
@@ -223,6 +239,7 @@ class BookSeeder extends Seeder
                 'summary' => 'Fullstack React is a comprehensive resource for developers who want to master React. The book provides step-by-step tutorials, hands-on projects, and deep insights into React\'s ecosystem, making it an excellent guide for both beginners and experienced developers.'
             ],
             [
+                'id' => 'cc625b42-6852-44af-b3a3-e668fa967b8e',
                 'title' => 'Cracking the Coding Interview',
                 'author' => 'Gayle Laakmann McDowell',
                 'genre' => 'Programming',

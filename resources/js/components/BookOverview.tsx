@@ -1,8 +1,17 @@
-import { Book } from '@/types';
+import { Book, SharedData } from '@/types';
+import { usePage } from '@inertiajs/react';
 import BookCover from './BookCover';
 import BorrowBook from './BorrowBook';
 
+interface Props extends Book {
+    eligibility: {
+        isEligible: boolean;
+        message: string;
+    };
+}
+
 export default function BookOverview({
+    id,
     title,
     author,
     genre,
@@ -12,7 +21,10 @@ export default function BookOverview({
     description,
     cover_color: coverColor,
     cover_url: coverUrl,
-}: Book) {
+    eligibility,
+}: Props) {
+    const { auth } = usePage<SharedData>().props;
+
     return (
         <section className="book-overview">
             <div className="flex flex-1 flex-col gap-5">
@@ -45,9 +57,7 @@ export default function BookOverview({
 
                 <p className="book-description">{description}</p>
 
-                <BorrowBook />
-
-                {/* {user && <BorrowBook bookId={id} userId={userId} borrowingEligibility={borrowingEligibility} />} */}
+                {auth.user && <BorrowBook bookId={id} title={title} eligibility={eligibility} />}
             </div>
 
             <div className="relative flex flex-1 justify-center">

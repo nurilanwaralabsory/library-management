@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BorrowRecord extends Model
 {
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'user_id',

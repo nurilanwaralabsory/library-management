@@ -3,6 +3,7 @@ import { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { Avatar } from './ui/avatar';
+import { Button } from './ui/button';
 
 const Header = () => {
     const page = usePage<SharedData>();
@@ -42,7 +43,9 @@ const Header = () => {
                         </Link>
                     </li>
                 ) : (
-                    ''
+                    <Link href={route('login')}>
+                        <Button className="cursor-pointer text-dark-100">Login</Button>
+                    </Link>
                 )}
             </ul>
         </header>
