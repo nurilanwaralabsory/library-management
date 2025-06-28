@@ -35,7 +35,10 @@ const BorrowBook = ({ bookId, eligibility, title }: Props) => {
                 <DialogTitle>Apakah kamu yakin ingin meminjam buku ini?</DialogTitle>
                 <DialogDescription className="text-light-100">
                     Anda akan meminjam buku <span className="text-primary">{title}</span>. Buku ini harus dikembalikan paling lambat pada{' '}
-                    <span className="text-primary">{new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(new Date())}</span>.
+                    <span className="text-primary">
+                        {new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(new Date().setDate(new Date().getDate() + 7))}
+                    </span>
+                    .
                 </DialogDescription>
                 <DialogFooter className="gap-2">
                     <DialogClose asChild>

@@ -128,7 +128,7 @@ class HomeController extends Controller
                     'user_id' => $user->id,
                     'book_id' => $book->id,
                     'borrow_date' => now(),
-                    'due_date' => now()->addDays(14),
+                    'due_date' => now()->addDays(7),
                     'return_date' => null,
                     'status' => 'BORROWED',
                     'created_at' => now(),
@@ -142,5 +142,20 @@ class HomeController extends Controller
             report($e);
             return back()->with('error', 'Terjadi kesalahan pada server, silakan coba lagi.');
         }
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+
+        $borrowedRecords = BorrowRecord::where('user_id', $user->id)
+            ->with('book')->get();
+        $ktm_image = $user->ktm ? asset('storage/' . $user->ktm) : null;
+
+        return Inertia::render('my-profile', [
+            'user' => $user,
+            'ktm_image' => $ktm_image,
+            'borrowedRecords' => $borrowedRecords,
+        ]);
     }
 }

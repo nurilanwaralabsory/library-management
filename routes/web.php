@@ -12,6 +12,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
     Route::post('/books/{book}/borrow', [HomeController::class, 'borrowBook'])->name('borrow-book');
+    Route::get('/my-profile', [HomeController::class, 'profile'])->name('my-profile');
 });
 
 require __DIR__ . '/settings.php';

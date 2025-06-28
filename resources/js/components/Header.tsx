@@ -32,7 +32,7 @@ const Header = () => {
                 </li>
                 {auth.user ? (
                     <li>
-                        <Link href="/my-profile">
+                        <Link href={route('my-profile')}>
                             <div className="flex items-center gap-2">
                                 <Avatar>
                                     <AvatarImage src="https://github.com/shadcn.png" />
