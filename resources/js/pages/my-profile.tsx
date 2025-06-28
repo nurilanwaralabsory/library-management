@@ -71,71 +71,77 @@ const MyProfile = ({ user, ktm_image, borrowedRecords }: { user: User; ktm_image
                 </div>
                 <div className="mx-auto">
                     <h1 className="mb-8 text-3xl font-bold text-light-100">Buku Pinjaman</h1>
-                    <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {borrowedRecords.map((record) => (
-                            <div key={record.id} className="relative w-65 overflow-hidden rounded-2xl bg-gray-900 p-6 text-white">
-                                <div
-                                    className="flex justify-center rounded-lg py-6"
-                                    style={{ backgroundColor: `color-mix(in srgb, ${record.book.cover_color} 70%, black 50%)` }}
-                                >
-                                    <li className="w-full xs:w-52">
-                                        <div className="flex w-full flex-col items-center">
-                                            <BookCover coverColor={record.book.cover_color} coverImage={record.book.cover_url} variant="medium" />
-                                        </div>
-                                    </li>
-                                </div>
-
-                                <div className="mt-4 flex flex-col space-y-4">
-                                    <div className="flex flex-col space-y-1">
-                                        <h3 className="truncate text-xl font-semibold">{record.book.title}</h3>
-                                        <p className="text-light-100 italic">{record.book.genre}</p>
-                                    </div>
-
-                                    <div className="flex flex-col space-y-2">
-                                        <div className="flex items-center space-x-2 text-sm text-light-100">
-                                            <BookIcon width={17} height={17} className="text-blue-100" />
-                                            <span>
-                                                Dipinjam pada{' '}
-                                                {new Date(record.borrow_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long' })}
-                                            </span>
-                                        </div>
-
-                                        <div className="flex items-center space-x-2 text-sm text-light-100">
-                                            {record.status === 'RETURNED' ? (
-                                                <div className="flex items-center space-x-2 text-sm text-light-100">
-                                                    <CircleCheck width={17} height={17} className="text-[#85FFC6]" />
-                                                    <span>
-                                                        Dikembalikan{' '}
-                                                        {new Date(record.return_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long' })}
-                                                    </span>
-                                                </div>
-                                            ) : calculateDaysLeft(record.due_date) === 0 ? (
-                                                <div className="flex items-center space-x-2 text-sm text-[#FF6C6F]">
-                                                    <OctagonAlert width={17} height={17} />
-                                                    <span>Pengembalian terlambat</span>
-                                                </div>
-                                            ) : (
-                                                <div className="flex items-center space-x-2 text-sm text-light-100">
-                                                    <Calendar width={17} height={17} className="text-light-200" />
-                                                    <span>{calculateDaysLeft(record.due_date)} hari tersisa</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
+                    {borrowedRecords.length === 0 ? (
+                        <div className="flex flex-col items-center space-y-2">
+                            <img src="/icons/not.svg" alt="belum ada buku pinjaman" />
+                            <p className="text-xl font-medium text-white">Kamu Belum Meminjam Buku Apapun</p>
+                            <div className="flex flex-col items-center text-center">
+                                <p className="text-light-100">Pinjam Buku Sekarang</p>
+                                <Link href={route('home')}>
+                                    <Button className="my-2 cursor-pointer text-dark-100">Pinjam Buku</Button>
+                                </Link>
                             </div>
-                        ))}
-                    </ul>
-                    <div className="flex flex-col items-center space-y-2">
-                        <img src="/icons/not.svg" alt="belum ada buku pinjaman" />
-                        <p className="text-xl font-medium text-white">Kamu Belum Meminjam Buku Apapun</p>
-                        <div className="flex flex-col items-center text-center">
-                            <p className="text-light-100">Pinjam Buku Sekarang</p>
-                            <Link href={route('home')}>
-                                <Button className="my-2 cursor-pointer text-dark-100">Pinjam Buku</Button>
-                            </Link>
                         </div>
-                    </div>
+                    ) : (
+                        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            {borrowedRecords.map((record) => (
+                                <div key={record.id} className="relative w-65 overflow-hidden rounded-2xl bg-gray-900 p-6 text-white">
+                                    <div
+                                        className="flex justify-center rounded-lg py-6"
+                                        style={{ backgroundColor: `color-mix(in srgb, ${record.book.cover_color} 70%, black 50%)` }}
+                                    >
+                                        <li className="w-full xs:w-52">
+                                            <div className="flex w-full flex-col items-center">
+                                                <BookCover coverColor={record.book.cover_color} coverImage={record.book.cover_url} variant="medium" />
+                                            </div>
+                                        </li>
+                                    </div>
+
+                                    <div className="mt-4 flex flex-col space-y-4">
+                                        <div className="flex flex-col space-y-1">
+                                            <h3 className="truncate text-xl font-semibold">{record.book.title}</h3>
+                                            <p className="text-light-100 italic">{record.book.genre}</p>
+                                        </div>
+
+                                        <div className="flex flex-col space-y-2">
+                                            <div className="flex items-center space-x-2 text-sm text-light-100">
+                                                <BookIcon width={17} height={17} className="text-blue-100" />
+                                                <span>
+                                                    Dipinjam pada{' '}
+                                                    {new Date(record.borrow_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long' })}
+                                                </span>
+                                            </div>
+
+                                            <div className="flex items-center space-x-2 text-sm text-light-100">
+                                                {record.status === 'RETURNED' ? (
+                                                    <div className="flex items-center space-x-2 text-sm text-light-100">
+                                                        <CircleCheck width={17} height={17} className="text-[#85FFC6]" />
+                                                        <span>
+                                                            Dikembalikan{' '}
+                                                            {new Date(record.return_date).toLocaleDateString('id-ID', {
+                                                                day: 'numeric',
+                                                                month: 'long',
+                                                            })}
+                                                        </span>
+                                                    </div>
+                                                ) : calculateDaysLeft(record.due_date) === 0 ? (
+                                                    <div className="flex items-center space-x-2 text-sm text-[#FF6C6F]">
+                                                        <OctagonAlert width={17} height={17} />
+                                                        <span>Pengembalian terlambat</span>
+                                                    </div>
+                                                ) : (
+                                                    <div className="flex items-center space-x-2 text-sm text-light-100">
+                                                        <Calendar width={17} height={17} className="text-light-200" />
+                                                        <span>{calculateDaysLeft(record.due_date)} hari tersisa</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
         </HomeLayout>
