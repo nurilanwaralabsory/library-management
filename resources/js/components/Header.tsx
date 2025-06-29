@@ -30,7 +30,7 @@ const Header = () => {
                         Search
                     </Link>
                 </li>
-                {auth.user ? (
+                {auth.user && auth.user.role === 'USER' ? (
                     <li>
                         <Link href={route('my-profile')}>
                             <div className="flex items-center gap-2">

@@ -1,11 +1,12 @@
 import BookCover from '@/components/BookCover';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import HomeLayout from '@/layouts/home-layout';
 import { Book, User } from '@/types';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { differenceInDays, isPast, parseISO } from 'date-fns';
-import { BadgeAlert, BadgeCheck, BookIcon, Calendar, CircleCheck, OctagonAlert } from 'lucide-react';
+import { BadgeAlert, BadgeCheck, BookIcon, Calendar, CircleCheck, LogOut, OctagonAlert } from 'lucide-react';
 
 interface Props extends Book {
     borrow_date: string;
@@ -29,6 +30,12 @@ const calculateDaysLeft = (dueDateString: string) => {
 };
 
 const MyProfile = ({ user, ktm_image, borrowedRecords }: { user: User; ktm_image: string; borrowedRecords: Props[] }) => {
+    const cleanup = useMobileNavigation();
+
+    const handleLogout = () => {
+        cleanup();
+        router.flushAll();
+    };
     return (
         <HomeLayout>
             <div className="flex flex-col-reverse gap-12 sm:gap-32 xl:flex-row xl:gap-16">
@@ -68,6 +75,12 @@ const MyProfile = ({ user, ktm_image, borrowedRecords }: { user: User; ktm_image
 
                         <img src={ktm_image} alt={`KTM.${user.name}`} className="rounded-lg" />
                     </div>
+                    <Link className="my-6 block" method="post" href={route('logout')} as="button" onClick={handleLogout}>
+                        <Button className="cursor-pointer text-dark-100">
+                            <LogOut />
+                            Log out
+                        </Button>
+                    </Link>
                 </div>
                 <div className="mx-auto">
                     <h1 className="mb-8 text-3xl font-bold text-light-100">Buku Pinjaman</h1>

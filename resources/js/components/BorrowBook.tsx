@@ -1,4 +1,5 @@
-import { useForm } from '@inertiajs/react';
+import { SharedData } from '@/types';
+import { useForm, usePage } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './ui/button';
@@ -16,6 +17,9 @@ const BorrowBook = ({ bookId, eligibility, title }: Props) => {
     const { post, processing } = useForm({});
     const [open, setOpen] = useState(false);
 
+    const page = usePage<SharedData>();
+    const { auth } = page.props;
+
     const handleBorrow = () => {
         post(route('borrow-book', bookId), {
             preserveScroll: true,
@@ -26,10 +30,12 @@ const BorrowBook = ({ bookId, eligibility, title }: Props) => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="book-overview_btn" disabled={!eligibility.isEligible || processing}>
-                    <img src="/icons/book.svg" alt="book" width={23} height={23} />
-                    <p className="font-BebasNeue text-xl text-dark-100">{eligibility.isEligible ? 'Pinjam Buku' : eligibility.message}</p>
-                </Button>
+                {auth.user && auth.user.role === 'USER' ? (
+                    <Button className="book-overview_btn" disabled={!eligibility.isEligible || processing}>
+                        <img src="/icons/book.svg" alt="book" width={23} height={23} />
+                        <p className="font-BebasNeue text-xl text-dark-100">{eligibility.isEligible ? 'Pinjam Buku' : eligibility.message}</p>
+                    </Button>
+                ) : null}
             </DialogTrigger>
             <DialogContent className="border-none bg-dark-100 text-white">
                 <DialogTitle>Apakah kamu yakin ingin meminjam buku ini?</DialogTitle>
