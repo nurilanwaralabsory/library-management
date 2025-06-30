@@ -13,7 +13,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // 1. Ambil data buku
         $latestBooks = Book::latest()->take(13)->get();
 
         if ($latestBooks->isEmpty()) {
@@ -36,9 +35,9 @@ class HomeController extends Controller
                     ->whereNull('return_date')
                     ->exists();
 
-                $isEligible = $book->available_copies > 0 && !$isBorrowedByCurrentUser;
+                $isEligible = $book->total_copies > 0 && !$isBorrowedByCurrentUser;
 
-                if ($book->available_copies <= 0) {
+                if ($book->total_copies <= 0) {
                     $message = 'Stok buku ini sedang habis.';
                 } elseif ($isBorrowedByCurrentUser) {
                     $message = 'Anda sedang meminjam buku ini.';
@@ -46,7 +45,7 @@ class HomeController extends Controller
                     $message = '';
                 }
             } else {
-                if ($book->available_copies <= 0) {
+                if ($book->total_copies <= 0) {
                     $message = 'Stok buku ini sedang habis.';
                 }
             }
@@ -64,7 +63,6 @@ class HomeController extends Controller
             'books' => $booksWithEligibility,
         ];
 
-        // 5. Kirim props ke view
         return Inertia::render('home', $props);
     }
 
@@ -80,10 +78,10 @@ class HomeController extends Controller
                 ->where('book_id', $book->id)
                 ->whereNull('return_date')
                 ->exists();
-            $isEligible = $book->available_copies > 0 && !$isBorrowedByCurrentUser;
+            $isEligible = $book->total_copies > 0 && !$isBorrowedByCurrentUser;
             $message = '';
 
-            if ($book->available_copies <= 0) {
+            if ($book->total_copies <= 0) {
                 $message = 'Buku sedang tidak tersedia';
             } else if ($isBorrowedByCurrentUser) {
                 $message = 'Buku sedang dipinjam oleh Anda';
@@ -91,7 +89,7 @@ class HomeController extends Controller
                 $message = '';
             }
         } else {
-            if ($book->available_copies <= 0) {
+            if ($book->total_copies <= 0) {
                 $message = 'Buku sedang tidak tersedia';
             }
         }
@@ -135,7 +133,7 @@ class HomeController extends Controller
                     'updated_at' => now(),
                 ]);
 
-                $book->decrement('available_copies');
+                $book->decrement('total_copies');
                 return back()->with('success', 'Buku berhasil dipinjam');
             });
         } catch (\Exception $e) {
@@ -149,6 +147,8 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $borrowedRecords = BorrowRecord::where('user_id', $user->id)
+            ->whereNull('return_date')
+            ->orderBy('borrow_date', 'desc')
             ->with('book')->get();
         $ktm_image = $user->ktm ? asset('storage/' . $user->ktm) : null;
 

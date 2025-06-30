@@ -54,12 +54,12 @@ const MyProfile = ({ user, ktm_image, borrowedRecords }: { user: User; ktm_image
                             <div className="flex-1">
                                 {user.status === 'APPROVED' ? (
                                     <div className="flex items-center space-x-1">
-                                        <BadgeCheck fill="oklch(0.8758 0.0587 73.67)" />
+                                        <BadgeCheck fill="oklch(0.8758 0.0587 73.67)" className="text-dark-100" />
                                         <span className="text-sm font-medium text-light-100">Akun Terverifikasi</span>
                                     </div>
                                 ) : (
                                     <div className="flex items-center space-x-1">
-                                        <BadgeAlert fill="#FF6C6F" />
+                                        <BadgeAlert fill="#FF6C6F" className="text-dark-100" />
                                         <span className="text-sm font-medium text-light-100">Akun belum disetujui </span>
                                     </div>
                                 )}

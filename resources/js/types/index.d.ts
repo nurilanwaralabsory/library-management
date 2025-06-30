@@ -92,3 +92,22 @@ export interface BorrowBookParams {
   userId: string;
 }
 
+export interface BorrowRequests {
+    id: number;
+    borrow_date: string;
+    return_date: string;
+    due_date: string;
+    status: RequestStatus;
+    user: {
+        name: string;
+        email: string;
+    };
+    book: {
+        title: string;
+        cover_color: string;
+        cover_url: string;
+    }
+}
+
+
+

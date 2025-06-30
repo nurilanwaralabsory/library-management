@@ -48,6 +48,8 @@
 
 <body class="font-IBMPlexSans antialiased">
     @inertia
+
+    <div id="portal-root"></div>
 </body>
 
 </html>

@@ -25,12 +25,12 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Borrow Request',
-        href: '/books',
+        href: '/dashboard/borrow-requests',
         icon: BookMarked,
     },
     {
         title: 'Account Request',
-        href: '/books/new',
+        href: '/dashboard/account-requests',
         icon: UserRound,
     },
 ];
