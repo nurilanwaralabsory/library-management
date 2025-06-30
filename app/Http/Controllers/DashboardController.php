@@ -37,6 +37,6 @@ class DashboardController extends Controller
         }
         $borrowRecord->save();
 
-        return redirect()->route('borrow-requests')->with('success', 'Borrow request status updated successfully.');
+        return redirect()->route('borrow-requests')->with('success', 'Status permintaan pinjaman berhasil diperbarui');
     }
 }

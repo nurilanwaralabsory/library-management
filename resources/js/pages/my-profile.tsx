@@ -98,7 +98,10 @@ const MyProfile = ({ user, ktm_image, borrowedRecords }: { user: User; ktm_image
                     ) : (
                         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                             {borrowedRecords.map((record) => (
-                                <div key={record.id} className="relative w-65 overflow-hidden rounded-2xl bg-gray-900 p-6 text-white">
+                                <div
+                                    key={record.id}
+                                    className="relative w-65 overflow-hidden rounded-2xl bg-gradient-to-b from-[#12141D] to-[#12151F] p-6 text-white"
+                                >
                                     <div
                                         className="flex justify-center rounded-lg py-6"
                                         style={{ backgroundColor: `color-mix(in srgb, ${record.book.cover_color} 70%, black 50%)` }}
@@ -140,7 +143,7 @@ const MyProfile = ({ user, ktm_image, borrowedRecords }: { user: User; ktm_image
                                                 ) : calculateDaysLeft(record.due_date) === 0 ? (
                                                     <div className="flex items-center space-x-2 text-sm text-[#FF6C6F]">
                                                         <OctagonAlert width={17} height={17} />
-                                                        <span>Pengembalian terlambat</span>
+                                                        <span>Melebihi batas pengembalian</span>
                                                     </div>
                                                 ) : (
                                                     <div className="flex items-center space-x-2 text-sm text-light-100">

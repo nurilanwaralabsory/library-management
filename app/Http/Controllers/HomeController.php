@@ -147,7 +147,6 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $borrowedRecords = BorrowRecord::where('user_id', $user->id)
-            ->whereNull('return_date')
             ->orderBy('borrow_date', 'desc')
             ->with('book')->get();
         $ktm_image = $user->ktm ? asset('storage/' . $user->ktm) : null;
