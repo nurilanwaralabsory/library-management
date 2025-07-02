@@ -48,7 +48,7 @@ const BorrowRequest = ({ borrowRequests }: { borrowRequests: BorrowRequests[] })
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Borrow Request" />
-            <div className="mx-auto w-full rounded-2xl bg-white p-6 shadow-lg sm:p-8">
+            <div className="mx-auto w-full rounded-2xl bg-white p-6 sm:p-8">
                 <div className="mb-6 flex flex-col items-start justify-between sm:flex-row sm:items-center">
                     <h1 className="text-2xl font-medium text-dark-100 sm:mb-0">Borrow Book Requests</h1>
                     <button className="flex items-center space-x-2 rounded-lg bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-200">
@@ -92,9 +92,6 @@ const BorrowRequest = ({ borrowRequests }: { borrowRequests: BorrowRequests[] })
                                 <th scope="col" className="px-4 py-3 font-semibold">
                                     Due Date
                                 </th>
-                                <th scope="col" className="px-4 py-3 font-semibold">
-                                    Receipt
-                                </th>
                             </tr>
                         </thead>
 
@@ -102,21 +99,28 @@ const BorrowRequest = ({ borrowRequests }: { borrowRequests: BorrowRequests[] })
                             {borrowRequests.map((req) => (
                                 <tr key={req.id} className="border-b border-gray-100 bg-white align-middle">
                                     <td className="px-4 py-4">
-                                        <BookCover
-                                            variant="small"
-                                            className="z-10"
-                                            coverColor={req.book.cover_color}
-                                            coverImage={req.book.cover_url}
-                                        />
+                                        <div className="flex items-center gap-x-3">
+                                            <BookCover
+                                                variant="extraSmall"
+                                                className="z-10"
+                                                coverColor={req.book.cover_color}
+                                                coverImage={req.book.cover_url}
+                                            />
+                                            <p className="truncate font-bold">{req.book.title}</p>
+                                        </div>
                                     </td>
                                     <td className="px-4 py-4 whitespace-nowrap">
-                                        <div className="flex items-center">
-                                            <Avatar className="h-8 w-8 overflow-hidden rounded-full">
+                                        <div className="flex items-center gap-x-3">
+                                            <Avatar className="h-10 w-10 overflow-hidden rounded-full">
                                                 <AvatarImage src={req.user.name} alt={req.user.name} />
                                                 <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
                                                     {getInitials(req.user.name)}
                                                 </AvatarFallback>
                                             </Avatar>
+                                            <div>
+                                                <p className="font-bold">{req.user.name}</p>
+                                                <p>{req.user.email}</p>
+                                            </div>
                                         </div>
                                     </td>
                                     <td className="px-4 py-4 whitespace-nowrap">
@@ -165,11 +169,6 @@ const BorrowRequest = ({ borrowRequests }: { borrowRequests: BorrowRequests[] })
                                             month: 'long',
                                             year: 'numeric',
                                         })}
-                                    </td>
-                                    <td className="px-4 py-4 whitespace-nowrap">
-                                        <button className="rounded-lg border border-indigo-200 px-4 py-1 text-xs font-semibold text-indigo-600 hover:bg-indigo-50">
-                                            Generate
-                                        </button>
                                     </td>
                                 </tr>
                             ))}

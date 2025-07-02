@@ -14,8 +14,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:ADMIN'])->group(function () {
-    Route::get('/dashboard/borrow-requests', [DashboardController::class, 'borrowRequests'])->name('borrow-requests');
+    Route::get('/borrow-requests', [DashboardController::class, 'borrowRequests'])->name('borrow-requests');
+    Route::get('/account-requests', [DashboardController::class, 'accountRequests'])->name('account-requests');
     Route::patch('/dashboard/borrow-requests/{borrowRecord}', [DashboardController::class, 'updateStatus'])->name('borrow-requests.update-status');
+    Route::patch('/dashboard/account-requests/{user}', [DashboardController::class, 'updateAccountStatus'])->name('account-requests.update-status');
 });
 
 Route::get('dashboard', function () {

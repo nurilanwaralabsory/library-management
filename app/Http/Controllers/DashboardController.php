@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BorrowRecord;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
@@ -38,5 +39,23 @@ class DashboardController extends Controller
         $borrowRecord->save();
 
         return redirect()->route('borrow-requests')->with('success', 'Status permintaan pinjaman berhasil diperbarui');
+    }
+
+    public function AccountRequests()
+    {
+        $users = User::where('status', 'PENDING')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return Inertia::render('account-requests', [
+            'users' => $users
+        ]);
+    }
+
+    public function updateAccountStatus(User $user)
+    {
+        $user->status = 'APPROVED';
+        $user->save();
+
+        return redirect()->route('account-requests')->with('success', 'Status akun berhasil diperbarui');
     }
 }

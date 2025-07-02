@@ -15,7 +15,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'All Users',
-        href: '/books/new',
+        href: '/all-users',
         icon: Users,
     },
     {
@@ -25,12 +25,12 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Borrow Request',
-        href: '/dashboard/borrow-requests',
+        href: '/borrow-requests',
         icon: BookMarked,
     },
     {
         title: 'Account Request',
-        href: '/dashboard/account-requests',
+        href: '/account-requests',
         icon: UserRound,
     },
 ];
