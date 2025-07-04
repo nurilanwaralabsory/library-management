@@ -15,7 +15,6 @@ export default function BookOverview({
     title,
     author,
     genre,
-    rating,
     total_copies: totalCopies,
     available_copies: availableCopies,
     description,
@@ -32,26 +31,21 @@ export default function BookOverview({
 
                 <div className="book-info">
                     <p>
-                        By <span className="font-semibold text-light-200">{author}</span>
+                        Oleh <span className="font-semibold text-light-200">{author}</span>
                     </p>
 
                     <p>
-                        Category <span className="font-semibold text-light-200">{genre}</span>
+                        Kategori <span className="font-semibold text-light-200">{genre}</span>
                     </p>
-
-                    <div className="flex flex-row gap-1">
-                        <img src="/icons/star.svg" alt="star" width={22} height={22} />
-                        <p>{rating}</p>
-                    </div>
                 </div>
 
                 <div className="book-copies">
                     <p>
-                        Total Books <span>{totalCopies}</span>
+                        Total Buku <span>{totalCopies}</span>
                     </p>
 
                     <p>
-                        Available Books <span>{availableCopies}</span>
+                        Buku Tersedia <span>{availableCopies}</span>
                     </p>
                 </div>
 

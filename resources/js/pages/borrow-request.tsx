@@ -7,8 +7,8 @@ import AppLayout from '@/layouts/app-layout';
 import { BorrowRequests, type BreadcrumbItem } from '@/types';
 import { Head, router } from '@inertiajs/react';
 
-type RequestStatus = 'BORROWED' | 'RETURNED' | 'LATE RETURNED';
-type BadgeVariant = 'borrowed' | 'returned' | 'lateReturned';
+type RequestStatus = 'BORROWED' | 'RETURNED' | 'LATE RETURNED' | 'PENDING';
+type BadgeVariant = 'borrowed' | 'returned' | 'lateReturned' | 'pending';
 
 const mapStatusToBadgeVariant = (status: RequestStatus): BadgeVariant => {
     switch (status) {
@@ -18,6 +18,8 @@ const mapStatusToBadgeVariant = (status: RequestStatus): BadgeVariant => {
             return 'returned';
         case 'LATE RETURNED':
             return 'lateReturned';
+        case 'PENDING':
+            return 'pending';
         default:
             return 'borrowed';
     }
@@ -135,6 +137,9 @@ const BorrowRequest = ({ borrowRequests }: { borrowRequests: BorrowRequests[] })
                                                         handleStatusChange(newStatus, req.id);
                                                     }}
                                                 >
+                                                    <DropdownMenuRadioItem value="PENDING">
+                                                        <Badge variant="pending">PENDING</Badge>
+                                                    </DropdownMenuRadioItem>
                                                     <DropdownMenuRadioItem value="BORROWED">
                                                         <Badge variant="borrowed">BORROWED</Badge>
                                                     </DropdownMenuRadioItem>

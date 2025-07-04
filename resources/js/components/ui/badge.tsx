@@ -20,6 +20,7 @@ const badgeVariants = cva(
         borrowed: "bg-[#F9F5FF] text-[#6941C6] border-transparent text-[14px]",
         returned: "bg-[#F0F9FF] text-[#026AA2] border-transparent text-[14px]",
         lateReturned: "bg-[#FFF1F3] text-[#C01048] border-transparent text-[14px]",
+        pending: "bg-[#FFF7CC] text-dark-100 border-transparent text-[14px]",
       },
     },
     defaultVariants: {

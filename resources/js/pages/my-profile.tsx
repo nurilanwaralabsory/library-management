@@ -6,7 +6,7 @@ import HomeLayout from '@/layouts/home-layout';
 import { Book, User } from '@/types';
 import { Link, router } from '@inertiajs/react';
 import { differenceInDays, isPast, parseISO } from 'date-fns';
-import { BadgeAlert, BadgeCheck, BookIcon, Calendar, CircleCheck, LogOut, OctagonAlert } from 'lucide-react';
+import { BadgeAlert, BadgeCheck, BookIcon, Calendar, CircleCheck, Clock, LogOut, OctagonAlert } from 'lucide-react';
 
 interface Props extends Book {
     borrow_date: string;
@@ -120,13 +120,17 @@ const MyProfile = ({ user, ktm_image, borrowedRecords }: { user: User; ktm_image
                                         </div>
 
                                         <div className="flex flex-col space-y-2">
-                                            <div className="flex items-center space-x-2 text-sm text-light-100">
-                                                <BookIcon width={17} height={17} className="text-blue-100" />
-                                                <span>
-                                                    Dipinjam pada{' '}
-                                                    {new Date(record.borrow_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long' })}
-                                                </span>
-                                            </div>
+                                            {record.status !== 'PENDING' ? (
+                                                <div className="flex items-center space-x-2 text-sm text-light-100">
+                                                    <BookIcon width={17} height={17} className="text-blue-100" />
+                                                    <span>
+                                                        Dipinjam pada{' '}
+                                                        {new Date(record.borrow_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long' })}
+                                                    </span>
+                                                </div>
+                                            ) : (
+                                                <div></div>
+                                            )}
 
                                             <div className="flex items-center space-x-2 text-sm text-light-100">
                                                 {record.status === 'RETURNED' ? (
@@ -139,6 +143,12 @@ const MyProfile = ({ user, ktm_image, borrowedRecords }: { user: User; ktm_image
                                                                 month: 'long',
                                                             })}
                                                         </span>
+                                                    </div>
+                                                ) : record.status === 'PENDING' ? (
+                                                    // KONDISI BARU UNTUK STATUS PENDING
+                                                    <div className="flex items-center space-x-2 text-sm text-yellow-400">
+                                                        <Clock width={17} height={17} />
+                                                        <span>Menunggu konfirmasi</span>
                                                     </div>
                                                 ) : calculateDaysLeft(record.due_date) === 0 ? (
                                                     <div className="flex items-center space-x-2 text-sm text-[#FF6C6F]">

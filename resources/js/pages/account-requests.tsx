@@ -5,7 +5,7 @@ import { useInitials } from '@/hooks/use-initials';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem, User } from '@/types';
 import { Head, router, useForm } from '@inertiajs/react';
-import { LoaderCircle } from 'lucide-react';
+import { Eye, LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -106,13 +106,14 @@ const AccountRequest = ({ users }: { users: User[] }) => {
                                             })}
                                         </td>
                                         <td className="px-4 py-4 whitespace-nowrap">{user.nim}</td>
-                                        <td className="px-4 py-4 whitespace-nowrap">ktm</td>
                                         <td className="px-4 py-4 whitespace-nowrap">
                                             <Dialog open={open} onOpenChange={setOpen}>
                                                 <DialogTrigger asChild>
-                                                    {/* <Badge className="cursor-pointer">Approved</Badge> */}
-                                                    <Button className="cursor-pointer bg-[#ECFDF3] text-[#027A48] hover:bg-[#ECFDF3]/90">
-                                                        Setujui Akun
+                                                    <Button className="cursor-pointer bg-transparent text-blue-500 shadow-none hover:bg-transparent">
+                                                        <div className="flex items-center gap-x-2">
+                                                            <Eye className="ml-2 h-4 w-4" />
+                                                            <span>Lihat KTM</span>
+                                                        </div>
                                                     </Button>
                                                 </DialogTrigger>
                                                 <DialogContent className="border-none bg-white text-white">
@@ -142,6 +143,17 @@ const AccountRequest = ({ users }: { users: User[] }) => {
                                                     </DialogFooter>
                                                 </DialogContent>
                                             </Dialog>
+                                        </td>
+                                        <td className="px-4 py-4 whitespace-nowrap">
+                                            <Button
+                                                className="cursor-pointer bg-[#ECFDF3] text-[#027A48] hover:bg-[#ECFDF3]/90"
+                                                onClick={() => handleUpdateAccountStatus(user.id)}
+                                            >
+                                                <button type="submit">
+                                                    {' '}
+                                                    {processing && <LoaderCircle className="h-4 w-4 animate-spin" />} Setujui Akun{' '}
+                                                </button>
+                                            </Button>
                                         </td>
                                     </tr>
                                 ))}

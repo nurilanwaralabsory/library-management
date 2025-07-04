@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('borrow_records', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignUuid('book_id')->constrained('books')->onDelete('cascade');
-            $table->timestamp('borrow_date');
-            $table->date('due_date');
-            $table->date('return_date')->nullable();
-            $table->enum('status', ['PENDING', 'BORROWED', 'RETURNED'])->default('BORROWED');
+            $table->string('title', 255);
+            $table->text('message');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('borrow_records');
+        Schema::dropIfExists('notifications');
     }
 };

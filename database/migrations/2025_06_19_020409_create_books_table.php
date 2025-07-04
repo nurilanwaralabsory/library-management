@@ -22,8 +22,8 @@ return new class extends Migration
             $table->text('description');
             $table->integer('total_copies')->default(1);
             $table->integer('available_copies')->default(0);
-            $table->text('video_url');
-            $table->text('summary');
+            $table->text('video_url')->nullable();
+            $table->text('summary')->nullable();
             $table->timestamps();
         });
     }

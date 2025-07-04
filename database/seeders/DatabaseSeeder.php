@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
             'role' => 'ADMIN',
+            'status' => 'APPROVED',
         ]);
 
         $this->call(BookSeeder::class);

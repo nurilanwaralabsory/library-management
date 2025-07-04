@@ -33,18 +33,17 @@ const BorrowBook = ({ bookId, eligibility, title }: Props) => {
                 {auth.user && auth.user.role === 'USER' ? (
                     <Button className="book-overview_btn" disabled={!eligibility.isEligible || processing}>
                         <img src="/icons/book.svg" alt="book" width={23} height={23} />
-                        <p className="font-BebasNeue text-xl text-dark-100">{eligibility.isEligible ? 'Pinjam Buku' : eligibility.message}</p>
+                        <p className="font-BebasNeue text-xl text-dark-100">
+                            {eligibility.isEligible ? 'Request Peminjaman Buku' : eligibility.message}
+                        </p>
                     </Button>
                 ) : null}
             </DialogTrigger>
             <DialogContent className="border-none bg-dark-100 text-white">
                 <DialogTitle>Apakah kamu yakin ingin meminjam buku ini?</DialogTitle>
                 <DialogDescription className="text-light-100">
-                    Anda akan meminjam buku <span className="text-primary">{title}</span>. Buku ini harus dikembalikan paling lambat pada{' '}
-                    <span className="text-primary">
-                        {new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(new Date().setDate(new Date().getDate() + 7))}
-                    </span>
-                    .
+                    Kamu akan meminjam buku <span className="text-primary">{title}</span>. Admin akan memproses permintaan Kamu. Pastikan Kamu telah
+                    membaca syarat dan ketentuan peminjaman buku.
                 </DialogDescription>
                 <DialogFooter className="gap-2">
                     <DialogClose asChild>

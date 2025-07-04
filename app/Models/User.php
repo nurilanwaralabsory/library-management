@@ -63,4 +63,9 @@ class User extends Authenticatable
             ->withPivot('borrow_date', 'due_date', 'return_date', 'status')
             ->withTimestamps();
     }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

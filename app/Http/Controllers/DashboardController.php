@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\BorrowRecord;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -30,11 +32,19 @@ class DashboardController extends Controller
         $borrowRecord->status = $validated['status'];
 
         if ($borrowRecord->status === 'BORROWED') {
+            $borrowRecord->book->decrement('available_copies');
             $borrowRecord->return_date = null;
+            Notification::query()->create([
+                'id' => uuid_create(),
+                'user_id' => $borrowRecord->user_id,
+                'title' => 'Peminjaman Buku Dikonfirmasi',
+                'message' => "Peminjaman buku {$borrowRecord->book->title} telah dikonfirmasi. Silahkan ambil buku Anda di perpustakaan.",
+            ]);
         } elseif ($borrowRecord->status === 'RETURNED' || $borrowRecord->status === 'LATE_RETURNED') {
             if (!$borrowRecord->return_date) {
                 $borrowRecord->return_date = now();
             }
+            $borrowRecord->book->increment('available_copies');
         }
         $borrowRecord->save();
 
@@ -57,5 +67,13 @@ class DashboardController extends Controller
         $user->save();
 
         return redirect()->route('account-requests')->with('success', 'Status akun berhasil diperbarui');
+    }
+
+    public function allBooks()
+    {
+        $books = Book::latest()->get();
+        return Inertia::render('all-books', [
+            'books' => $books
+        ]);
     }
 }

@@ -27,6 +27,13 @@ export interface FlashMessage {
     error?:string;
 }
 
+export interface Notification {
+    id: string;
+    user_id: number;
+    book_id?: string;
+    title: string;
+    message: string;
+}
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
@@ -35,6 +42,7 @@ export interface SharedData {
     sidebarOpen: boolean;
     [key: string]: unknown;
     flash: FlashMessage;
+    notifications: Notification[];
 }
 
 export interface User {
@@ -64,7 +72,7 @@ export interface Book {
   cover_url: string;
   video_url: string;
   summary: string;
-  created_at: Date | null;
+  created_at: string;
 }
 
 export interface AuthCredentials {

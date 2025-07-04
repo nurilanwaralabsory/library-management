@@ -40,7 +40,7 @@ class HomeController extends Controller
                 if ($book->total_copies <= 0) {
                     $message = 'Stok buku ini sedang habis.';
                 } elseif ($isBorrowedByCurrentUser) {
-                    $message = 'Anda sedang meminjam buku ini.';
+                    $message = 'Anda sedang meminjam buku ini';
                 } else {
                     $message = '';
                 }
@@ -125,16 +125,15 @@ class HomeController extends Controller
                     'id' => uuid_create(),
                     'user_id' => $user->id,
                     'book_id' => $book->id,
-                    'borrow_date' => now(),
-                    'due_date' => now()->addDays(7),
+                    'borrow_date' => now()->format('Y-m-d'),
+                    'due_date' => now()->addDays(7)->format('Y-m-d'),
                     'return_date' => null,
-                    'status' => 'BORROWED',
+                    'status' => 'PENDING',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
 
-                $book->decrement('total_copies');
-                return back()->with('success', 'Buku berhasil dipinjam');
+                return back()->with('success', 'Permintaan peminjaman buku berhasil dibuat. Admin akan memproses permintaan Anda.');
             });
         } catch (\Exception $e) {
             report($e);
@@ -146,7 +145,8 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        $borrowedRecords = BorrowRecord::where('user_id', $user->id)
+        $borrowedRecords = BorrowRecord::latest()
+            ->where('user_id', $user->id)
             ->orderBy('borrow_date', 'desc')
             ->with('book')->get();
         $ktm_image = $user->ktm ? asset('storage/' . $user->ktm) : null;
