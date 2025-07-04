@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BookWise - Search</title>
+    <title>NFLibrary - Search</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gradient-to-b from-slate-900 to-slate-950 text-white min-h-screen pb-32">
@@ -11,7 +11,7 @@
     <nav class="flex justify-between items-center px-6 py-4 bg-slate-950 border-b border-slate-700">
       <div class="text-xl font-bold flex items-center space-x-2">
         <img src="https://img.icons8.com/ios-filled/50/ffffff/open-book.png" class="w-6 h-6" alt="Book Icon">
-        <span>BookWise</span>
+        <span>NFLibrary</span>
       </div>
       <div class="flex items-center space-x-6">
         <a href="#" class="hover:text-sky-400">Home</a>
