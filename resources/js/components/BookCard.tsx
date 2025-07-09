@@ -8,7 +8,7 @@ const BookCard = ({ id, title, genre, cover_color: coverColor, cover_url: coverU
     return (
         <li className={cn(isLoanedBook && 'w-full xs:w-52')}>
             <Link href={route('detail-book', id)} className={cn(isLoanedBook && 'flex w-full flex-col items-center')}>
-                <BookCover coverColor={coverColor} coverImage={coverUrl} />
+                <BookCover coverColor={coverColor} coverImage={coverUrl} className="h-[199px] w-[144px] xs:h-[239px] xs:w-[174px]" />
 
                 <div className={cn('mt-4', !isLoanedBook && 'max-w-28 xs:max-w-40')}>
                     <p className="book-title">{title}</p>

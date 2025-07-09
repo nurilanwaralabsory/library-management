@@ -68,12 +68,4 @@ class DashboardController extends Controller
 
         return redirect()->route('account-requests')->with('success', 'Status akun berhasil diperbarui');
     }
-
-    public function allBooks()
-    {
-        $books = Book::latest()->get();
-        return Inertia::render('all-books', [
-            'books' => $books
-        ]);
-    }
 }

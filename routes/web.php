@@ -4,12 +4,12 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
-use App\Models\Notification;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/books/{book}', [HomeController::class, 'detailBook'])->name('detail-book');
+Route::get('/search-books', [HomeController::class, 'searchBooks'])->name('search-books');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/books/{book}/borrow', [HomeController::class, 'borrowBook'])->name('borrow-book');

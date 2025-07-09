@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\BorrowRecord;
-use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -94,12 +94,19 @@ class HomeController extends Controller
             }
         }
 
+        $similiarBooks = Book::where('genre', $book->genre)
+            ->where('id', '!=', $book->id)
+            ->latest()
+            ->take(6)
+            ->get();
+
         return Inertia::render('detail-book', [
             'book' => $book,
             'eligibility' => [
                 'isEligible' => $isEligible,
                 'message' => $message,
-            ]
+            ],
+            'similiarBooks' => $similiarBooks,
         ]);
     }
 
@@ -155,6 +162,29 @@ class HomeController extends Controller
             'user' => $user,
             'ktm_image' => $ktm_image,
             'borrowedRecords' => $borrowedRecords,
+        ]);
+    }
+
+    public function searchBooks(Request $request)
+    {
+        $query = Book::query();
+
+        if ($request->filled('q')) {
+
+            $searchTerm = $request->input('q');
+            $query->where('title', 'LIKE', '%' . $searchTerm . '%');
+        } else if ($request->filled('genre') && $request->input('genre') !== 'all') {
+            $genre = $request->input('genre');
+            $query->where('genre', $genre);
+        } else {
+            $query->take(6);
+        }
+
+        $books = $query->latest()->get();
+
+        return Inertia::render('search-books', [
+            'books' => $books,
+            'filters' => $request->only(['q', 'genre']),
         ]);
     }
 }
